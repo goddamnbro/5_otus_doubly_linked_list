@@ -8,7 +8,7 @@ type DoublyLinkedList struct {
 }
 
 func (dl *DoublyLinkedList) InsertToFront(value interface{}) {
-	item := &Item{value: value}
+	item := &Item{Value: value}
 
 	if dl.Length == 0 {
 		dl.Head = item
@@ -24,7 +24,7 @@ func (dl *DoublyLinkedList) InsertToFront(value interface{}) {
 }
 
 func (dl *DoublyLinkedList) InsertToBack(value interface{}) {
-	item := &Item{value: value}
+	item := &Item{Value: value}
 
 	if dl.Length == 0 {
 		dl.Head = item
@@ -81,10 +81,10 @@ func (dl *DoublyLinkedList) Values() []interface{} {
 
 	if dl.Length > 0 {
 		item := dl.Head
-		values = append(values, item.value)
+		values = append(values, item.Value)
 		for item.Next() != nil {
 			item = item.Next()
-			values = append(values, item.value)
+			values = append(values, item.Value)
 		}
 	}
 
@@ -93,13 +93,9 @@ func (dl *DoublyLinkedList) Values() []interface{} {
 
 // Item and his methods
 type Item struct {
-	value interface{}
+	Value interface{}
 	next  *Item
 	prev  *Item
-}
-
-func (item *Item) Value() interface{} {
-	return item.Value
 }
 
 func (item *Item) Next() *Item {
