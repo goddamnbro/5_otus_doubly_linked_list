@@ -1,19 +1,5 @@
 package otus_doubly_linked_list
 
-//Item   // элемент списка
-//Value() interface{}  // возвращает значение
-//Nex() *Item          // следующий Item
-//Prev() *Item         // предыдущий
-//Remove()
-
-//List      // тип контейнер
-//Len()   // длинна списка
-//First() // первый Item
-//Last()  // последний Item
-//PushFront(v interface{}) // добавить значение в начало
-//PushBack(v interface{})  // добавить значение в конец
-//
-
 // DoublyLinkedList and his methods
 type DoublyLinkedList struct {
 	Length uint
@@ -84,17 +70,10 @@ func (dl *DoublyLinkedList) Remove(item *Item) {
 		return
 	}
 
-	// looking for item
-	listItem := dl.Head
-	for listItem.next != nil {
-		if listItem.next == item {
-			listItem.next = listItem.next.next
-			listItem.next.prev = listItem
-			dl.Length--
-			return
-		}
-		listItem = listItem.next
-	}
+	// if we need to remove item somewhere in the middle of list
+	item.prev.next = item.next
+	item.next.prev = item.prev
+	dl.Length--
 }
 
 func (dl *DoublyLinkedList) Values() []interface{} {
@@ -130,24 +109,3 @@ func (item *Item) Next() *Item {
 func (item *Item) Prev() *Item {
 	return item.prev
 }
-
-//func main() {
-//
-//	dl := DoublyLinkedList{}
-//
-//	dl.InsertToBack("A")
-//	dl.InsertToBack("B")
-//	dl.InsertToFront(2)
-//	dl.InsertToFront(1)
-//
-//	fmt.Println("dl -->", dl)
-//	fmt.Println("values -->", dl.Values())
-//	fmt.Println("len -->", dl.Length)
-//
-//	item := dl.Head
-//	fmt.Println("item -->", item.value)
-//	dl.Remove(item)
-//	fmt.Println("values -->", dl.Values())
-//	fmt.Println("len -->", dl.Length)
-//
-//}
